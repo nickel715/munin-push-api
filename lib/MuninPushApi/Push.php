@@ -61,11 +61,11 @@ class Push {
      */
     public function import($filename = self::PHP_PUTDATA) {
 
-        $input = new SplFileObject($filename);
+        $fh    = fopen($filename, 'r');
         $redis = $this->getRedis();
         $ttl   = Config::getConfig()->redis->ttl;
 
-        foreach ($input as $row) {
+        while (($row = fgets($fh)) !== false) {
 
             if (!empty($row)) {
                 $data = explode(' ', $row);
