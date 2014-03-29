@@ -9,14 +9,8 @@ use MuninPushApi\Config;
  */
 class Push extends Base {
 
-    protected $category = 'other';
-
     const PHP_PUTDATA = 'php://input';
     const PHP_STDIN   = 'php://stdin';
-
-    public function __construct($category = 'other') {
-        $this->category = $category;
-    }
 
     /**
      * Get redis key
@@ -34,7 +28,7 @@ class Push extends Base {
             $parts[] = $prefix;
         }
 
-        $parts[] = $this->category;
+        $parts[] = $this->name;
         $parts[] = $key;
 
         return implode(':', $parts);
@@ -47,7 +41,7 @@ class Push extends Base {
      */
     public function import($filename = self::PHP_PUTDATA) {
 
-        $fh    = fopen($filename, 'r');
+        $fh = fopen($filename, 'r');
 
         while (($row = fgets($fh)) !== false) {
 

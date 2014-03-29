@@ -11,11 +11,11 @@ class PushTest extends \PHPUnit_Framework_TestCase {
 
     public function setUp() {
 
-        $category = 'testCategory';
+        $graph = 'testGraph';
         $prefix   = Config::getConfig()->redis->prefix;
 
-        $this->push     = new Push($category);
-        $this->redisKey = $prefix.':'.$category;
+        $this->push     = new Push($graph);
+        $this->redisKey = $prefix.':'.$graph;
 
     }
 
@@ -27,14 +27,7 @@ class PushTest extends \PHPUnit_Framework_TestCase {
 
     }
 
-    public function testValidRedisInstance() {
-        $this->assertInstanceOf('Redis', $this->push->getRedis());
-    }
-
-    /**
-     * @todo improve methode name
-     */
-    public function testImport() {
+    public function testImportWithTestFile() {
 
         $fixure = __DIR__.'/../files/import_data.put';
         $this->push->import($fixure);
