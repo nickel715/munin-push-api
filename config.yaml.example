@@ -1,0 +1,11 @@
+redis:
+    connection: /tmp/redis.sock
+    prefix: munin-push-api
+graphs:
+  -
+    config:
+    category_name: system
+    graph_name: name
+    graph_args: -base 1024
+    label:
+        usage: Verbrauch
