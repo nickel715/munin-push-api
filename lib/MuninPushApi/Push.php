@@ -2,17 +2,14 @@
 
 namespace MuninPushApi;
 
-use Redis;
-use SplFileObject;
 use MuninPushApi\Config;
 
 /**
  *
  */
-class Push {
+class Push extends Base {
 
     protected $category = 'other';
-    protected $redis = NULL;
 
     const PHP_PUTDATA = 'php://input';
     const PHP_STDIN   = 'php://stdin';
@@ -43,17 +40,6 @@ class Push {
         return implode(':', $parts);
     }
 
-    public function getRedis() {
-
-        if (!$this->redis instanceof Redis) {
-            $this->redis = new Redis();
-            $this->redis->connect(Config::getConfig()->redis->connection);
-        }
-
-        return $this->redis;
-
-    }
-
     /**
      * Write data from given filename to redis
      *
@@ -62,14 +48,12 @@ class Push {
     public function import($filename = self::PHP_PUTDATA) {
 
         $fh    = fopen($filename, 'r');
-        $redis = $this->getRedis();
-        $ttl   = Config::getConfig()->redis->ttl;
 
         while (($row = fgets($fh)) !== false) {
 
             if (!empty($row)) {
                 $data = explode(' ', $row);
-                echo $redis->set($this->getRedisKey(trim($data[0])), trim($data[1]), $ttl);
+                self::getRedis()->set($this->getRedisKey(trim($data[0])), trim($data[1]), Config::getConfig()->redis->ttl);
             }
 
         }
