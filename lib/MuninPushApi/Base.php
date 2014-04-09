@@ -26,4 +26,26 @@ abstract class Base {
 
     }
 
+    /**
+     * Get redis key
+     *
+     * @param  string $key
+     * @return string
+     */
+    public function getRedisKey($key) {
+
+        $prefix = Config::getConfig()->redis->prefix;
+
+        $parts = [];
+
+        if (!empty($prefix)) {
+            $parts[] = $prefix;
+        }
+
+        $parts[] = $this->name;
+        $parts[] = $key;
+
+        return implode(':', $parts);
+    }
+
 }

@@ -13,28 +13,6 @@ class Push extends Base {
     const PHP_STDIN   = 'php://stdin';
 
     /**
-     * Get redis key
-     *
-     * @param  string $key
-     * @return string
-     */
-    public function getRedisKey($key) {
-
-        $prefix = Config::getConfig()->redis->prefix;
-
-        $parts = [];
-
-        if (!empty($prefix)) {
-            $parts[] = $prefix;
-        }
-
-        $parts[] = $this->name;
-        $parts[] = $key;
-
-        return implode(':', $parts);
-    }
-
-    /**
      * Write data from given filename to redis
      *
      * @param string $filename
