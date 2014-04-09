@@ -1,11 +1,13 @@
 redis:
     connection: /tmp/redis.sock
     prefix: munin-push-api
+    ttl: 330
 graphs:
-  -
-    config:
-    category_name: system
-    graph_name: name
-    graph_args: -base 1024
-    label:
-        usage: Verbrauch
+    myGraph:
+        persistent: true
+        config:
+            category_name: system
+            graph_name: name
+            graph_args: -base 1024
+        label:
+            usage: Verbrauch
