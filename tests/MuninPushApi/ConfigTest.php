@@ -27,6 +27,8 @@ class ConfigTest extends \PHPUnit_Framework_Testcase {
 
         $this->assertEquals(spl_object_hash($zfConfig), spl_object_hash(Config::getConfig()));
 
+        Config::setConfig();
+
     }
 
 }

@@ -27,7 +27,7 @@ class Config {
 
     }
 
-    public static function setConfig(ZendConfig $config) {
+    public static function setConfig(ZendConfig $config = null) {
         self::$config = $config;
     }
 
