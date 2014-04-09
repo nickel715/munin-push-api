@@ -3,6 +3,7 @@
 namespace MuninPushApi;
 
 use MuninPushApi\Config;
+use MuninPushApi\Redis;
 
 /**
  *
@@ -24,10 +25,17 @@ class Push extends Base {
         while (($row = fgets($fh)) !== false) {
 
             if (!empty($row)) {
+
                 list($key, $val) = explode(' ', $row);
                 $key = $this->getRedisKey(trim($key));
                 $val = trim($val);
+
+                if ($this->getGraph()->persistent) {
                     Redis::getRedis()->set($key, $val);
+                } else {
+                    Redis::getRedis()->set($key, $val, Config::getConfig()->redis->ttl);
+                }
+
             }
 
         }
