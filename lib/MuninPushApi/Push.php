@@ -24,8 +24,10 @@ class Push extends Base {
         while (($row = fgets($fh)) !== false) {
 
             if (!empty($row)) {
-                $data = explode(' ', $row);
-                self::getRedis()->set($this->getRedisKey(trim($data[0])), trim($data[1]), Config::getConfig()->redis->ttl);
+                list($key, $val) = explode(' ', $row);
+                $key = $this->getRedisKey(trim($key));
+                $val = trim($val);
+                    Redis::getRedis()->set($key, $val);
             }
 
         }
