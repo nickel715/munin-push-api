@@ -2,6 +2,7 @@
 
 namespace MuninPushApi;
 
+use \Zend\Config\Config as ZendConfig;
 use Zend\Config\Factory as ConfigFactory;
 
 /**
@@ -24,6 +25,10 @@ class Config {
 
         return self::$config;
 
+    }
+
+    public static function setConfig(ZendConfig $config) {
+        self::$config = $config;
     }
 
 }
