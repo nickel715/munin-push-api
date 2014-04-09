@@ -4,11 +4,11 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use MuninPushApi\Push;
 
-$category = 'other';
-
-if (!empty($_GET['category'])) {
-    $category = $_GET['category'];
+if (!empty($_GET['name'])) {
+    $name = $_GET['name'];
+} else {
+    die('name required');
 }
 
-$push = new Push($category);
+$push = new Push($name);
 $push->import(Push::PHP_PUTDATA);
