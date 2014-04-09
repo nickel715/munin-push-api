@@ -20,8 +20,11 @@ class ConfigTest extends \PHPUnit_Framework_Testcase {
     }
 
     public function testSetConfig() {
+
         $zfConfig = new ZendConfig([]);
+
         Config::setConfig($zfConfig);
+
         $this->assertEquals(spl_object_hash($zfConfig), spl_object_hash(Config::getConfig()));
 
     }
