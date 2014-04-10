@@ -21,14 +21,6 @@ class PushTest extends \PHPUnit_Framework_TestCase {
 
     }
 
-    public function testKeyName() {
-
-        $key = $this->push->getRedisKey('test');
-
-        $this->assertEquals($this->redisKey.':test', $key);
-
-    }
-
     public function testImportWithTestFile() {
 
         $fixure = __DIR__.'/../files/import_data.put';
