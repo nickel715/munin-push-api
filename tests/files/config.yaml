@@ -1,0 +1,17 @@
+redis:
+    connection: localhost
+    prefix: munin-push-api-tests
+    ttl: 30
+graphs:
+    diskusage:
+        config:
+            category_name: system
+            graph_args: -base 1024
+        label:
+            volume1: volume1
+    cpu:
+        config:
+            category_name: system
+        label:
+            system: system
+            iowait: iowait

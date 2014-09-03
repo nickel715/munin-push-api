@@ -5,11 +5,15 @@ php:
   - 5.5
   - 5.6
 
+services:
+  - redis-server
+
 before_script:
     - composer self-update
     - composer --no-dev --prefer-source install
     - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - printf "\n" | pecl install yaml
+    - cp tests/files/config.yaml .
 
 script:
     - phpunit --bootstrap tests/bootstrap.php tests/

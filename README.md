@@ -1,6 +1,6 @@
-[![Build Status](https://secure.travis-ci.org/nickel715/munin-push-api.png?branch=master)](http://travis-ci.org/nickel715/munin-push-api)
-
 # munin push api
+
+[![Build Status](https://secure.travis-ci.org/nickel715/munin-push-api.png?branch=master)](http://travis-ci.org/nickel715/munin-push-api)
 
 munin cron run every */5 minute, the data push may send 2-3 minutes earlier.
 
